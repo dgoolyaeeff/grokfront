@@ -10,12 +10,12 @@ object Gf extends cask.MainRoutes:
     val content = os.read(path)
     content
 
-  @cask.get("/icon.ico")
+  @cask.get("/icon.png")
   def i() =
     val path: os.Path = 
-      os.root / "home" / "dimany" / "junk_tests" / "grokfront" / "Gf" / "src" / "icon.ico"
-    val content = os.read(path)
-    content
+      os.root / "home" / "dimany" / "junk_tests" / "grokfront" / "Gf" / "src" / "icon.png"
+    val content = os.read.bytes(path)
+    cask.Response(content, 200, Seq(("Content-Type", "image/png")))
   
   @cask.get("/")
   def h() = 
@@ -26,7 +26,7 @@ object Gf extends cask.MainRoutes:
         meta(name:="viewport", content:="width=device-width, initial-scale=1.0"),
         title("grokfront"),
         link(rel:="stylesheet", href:="/styles.css"),
-        link(rel:="shortcut icon", href:="/icon.ico", `type`:="image/x-icon")
+        link(rel:="shortcut icon", href:="/icon.png", `type`:="image/x-icon")
       ),
       body(
         p(cls:="red")("test")
